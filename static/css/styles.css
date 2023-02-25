@@ -1,0 +1,35 @@
+
+/*body {*/
+/*    background-color: antiquewhite;*/
+/*}*/
+
+.icon-roll {
+    border: 3px solid #cde0ff;
+    border-radius: 10px;
+    padding: 2px;
+}
+
+.body {
+    display: none;
+}
+
+table {
+    font-family: sans-serif;
+    text-align: left;
+    border-collapse: separate;
+    border-spacing: 5px;
+    border: 16px solid #cde0ff;
+    background-color: #cde0ff;
+    border-radius: 20px;
+}
+
+th {
+    font-size: 18px;
+    padding: 10px;
+}
+
+td {
+    background-color: #dbe7ff;
+    padding: 10px;
+}
+
