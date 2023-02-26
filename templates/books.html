@@ -8,38 +8,43 @@
     <title> Books </title>
 </head>
 <body>
-    <h1> Books list </h1>
-    <div class="module">
-         <div class="caption clearfix">
-            <span class="icon-roll">Добавить</span>
-         </div>
-         <div class="body hidden-panel">
-            <form action="/books" method="post" class="books-form">
-                <p><label for="book-title">Title:<input type="text" name="title" id="book-title"></label></p>
-                <p><label for="book-isbn">ISBN:<input type="text" name="isbn" id="book-isbn"></label></p>>
-                <input type="submit" value="Отправить">
-            </form>
-         </div>
-      </div>
+    <div class="content">
+        <div class="header">
+            
+        </div>
+        <h1> Books list </h1>
+        <div class="module">
+             <div class="caption clearfix">
+                <span class="icon-roll">Добавить</span>
+             </div>
+             <div class="body hidden-panel">
+                <form action="/books" method="post" class="books-form">
+                    <p><label for="book-title">Title:<input type="text" name="title" id="book-title"></label></p>
+                    <p><label for="book-isbn">ISBN:<input type="text" name="isbn" id="book-isbn"></label></p>>
+                    <input type="submit" value="Отправить">
+                </form>
+             </div>
+          </div>
 
-    <table>
-        <tr>
-            <th>#</th>
-            <th>Title</th>
-            <th>ISBN</th>
-            <th>FK</th>
-        </tr>
-        {% for item in booksList %}
+        <table>
             <tr>
-                {% for value in item %}
-                    <td>
-                    {{ value }}
-                    </td>
-                {% endfor %}
+                <th>#</th>
+                <th>Title</th>
+                <th>ISBN</th>
+                <th>FK</th>
             </tr>
-        {% endfor %}
-    </table>
-        <script src="https://ajax.googleapis.com/ajax/libs/jquery/2.2.0/jquery.min.js"></script>
-        <script src="{{ url_for('static', filename = 'js/storeHandler.js')}}"></script>
+            {% for item in booksList %}
+                <tr>
+                    {% for value in item %}
+                        <td>
+                        {{ value }}
+                        </td>
+                    {% endfor %}
+                </tr>
+            {% endfor %}
+        </table>
+            <script src="https://ajax.googleapis.com/ajax/libs/jquery/2.2.0/jquery.min.js"></script>
+            <script src="{{ url_for('static', filename = 'js/storeHandler.js')}}"></script>
+    </div>
 </body>
 </html>

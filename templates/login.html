@@ -1,19 +1,22 @@
 <!DOCTYPE html>
-<html lang="en">
+<html lang="ru">
 <head>
     <meta charset="UTF-8">
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link rel="stylesheet" href="{{ url_for('static', filename = 'css/login-style.css')}}">
     <title>Login</title>
 </head>
 <body>
-    <h1>Authorization</h1>
-    <div class="main-login">
-        <form action="/login" method="post" class="login-form">
-            <p><label for="username">Login:</label> <input type="text" name="username" id="username" value="" required></p>
-            <p><label for="psw">Password:</label> <input type="password" name="psw" id="psw" value="" required></p>
-            <input type="submit" value="Login">
-        </form>
+    <div class="content">
+        <main class="main">
+            <img src="static/img/main-logo.png" alt="logo" class="logo">
+            <form action="/login" method="post" class="main-login-form">
+                <p><input type="text" name="username" id="username" placeholder="Логин" class="field" required></p>
+                <p><input type="password" name="psw" id="psw" placeholder="Пароль" class="field" required></p>
+                <input type="submit" value="Войти" class="submit_button">
+            </form>
+        </main>
     </div>
 </body>
 </html>
