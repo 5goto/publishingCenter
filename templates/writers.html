@@ -1,0 +1,122 @@
+<!DOCTYPE html>
+<html lang="ru">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link rel="stylesheet" href="{{ url_for('static', filename = 'css/styles.css')}}">
+    <title> Писатели </title>
+</head>
+<body>
+    <div class="content">
+        <div class="header">
+            <div class="logo-with-label">
+                <img src="static/img/logo.png" alt="logo" class="logo">
+                <p>Печать</p>
+            </div>
+            <nav class="navigation">
+               <a href={{url_for('books_table')}} class='disabled menu-link representative manager'>Книги</a>
+               <a href={{url_for('writers_table')}} class='disabled menu-link representative'>Писатели</a>
+               <a href={{url_for('contracts_table')}} class='disabled menu-link representative'>Контракты</a>
+               <a href={{url_for('customers_table')}} class='menu-link manager disabled'>Заказчики</a>
+               <a href={{url_for('orders_table')}} class='disabled menu-link manager'>Заказы</a>
+            </nav>
+            <div class="user-panel">
+                <p class="current-user">{{ user }}</p>
+                <a href="/logout" class="logout-link">Выйти</a>
+            </div>
+        </div>
+        <h1> Писатели </h1>
+            {% with messages = get_flashed_messages() %}
+            {% if messages %}
+        {% for cat, msg in messages %}
+            <div class="flash {{cat}}">{{ msg }}</div>
+        {% endfor %}
+            {% endif %}
+        {% endwith %}
+        <main>
+        <table class="table">
+            <thead>
+            <tr>
+                <th>#</th>
+                <th>Серия паспорта</th>
+                <th>Номер паспорта</th>
+                <th>Фамилия</th>
+                <th>Имя</th>
+                <th>Отчество</th>
+                <th>Адрес</th>
+                <th>Номер телефона</th>
+                <th>ID контракта</th>
+            </tr>
+            </thead>
+            <tbody>
+            {% for item in booksList %}
+                <tr>
+                    {% for value in item %}
+                        <td>
+                        {{ value }}
+                        </td>
+                    {% endfor %}
+                </tr>
+            {% endfor %}
+            </tbody>
+        </table>
+
+        <div class="admin-panel">
+        <div class="module">
+            <div class="caption clearfix">
+               <span class="icon-roll-add">+</span>
+            </div>
+            <div class="body hidden-panel">
+               <form action="/writers?operation=add" method="post" class="books-form">
+                   <p><label for="add-seria">Серия:</label></p><input type="text" name="seria" id="add-seria">
+                   <p><label for="add-number">Номер:</label></p><input type="text" name="number" id="add-number">
+                   <p><label for="add-lastname">Фамилия:</label></p><input type="text" name="lastname" id="add-lastname">
+                   <p><label for="add-name">Имя:</label></p><input type="text" name="name" id="add-name">
+                   <p><label for="add-patro">Отчество:</label></p><input type="text" name="patro" id="add-patro">
+                   <p><label for="add-address">Адрес:</label></p><input type="text" name="address" id="add-address">
+                   <p><label for="add-phone">Номер телефона:</label></p><input type="text" name="phone" id="add-phone">
+                   <hr>
+                   <p><label for="add-contract-num">Номер контракта:</label></p><input type="text" name="contract-num" id="add-contract-num">
+                   <p><label for="add-validity">Срок действия:</label></p><input type="text" name="validity" id="add-validity">
+                   <p><input type="submit" value="Отправить"></p>
+               </form>
+            </div>
+         </div>
+         <div class="module">
+            <div class="caption clearfix">
+               <span class="icon-roll-remove">-</span>
+            </div>
+            <div class="body hidden-panel">
+               <form action="/writers?operation=remove" method="post" class="books-form">
+                   <p><label for="delete-id">ID:</label></p><input type="text" name="id" id="delete-id" readonly required>
+                   <p><input type="submit" value="Отправить"></p>
+               </form>
+            </div>
+         </div>
+         <div class="module">
+            <div class="caption clearfix">
+               <span class="icon-roll-remove"><img src="static/img/redact.png" alt="" class="redact-image"></span>
+            </div>
+            <div class="body hidden-panel">
+               <form action="/writers?operation=update" method="post" class="books-form">
+                   <p><label for="update-id">ID:</label></p><input type="text" name="id" id="update-id" readonly>
+                   <p><label for="update-seria">Серия:</label></p><input type="text" name="seria" id="update-seria">
+                   <p><label for="update-number">Номер:</label></p><input type="text" name="number" id="update-number">
+                   <p><label for="update-lastname">Фамилия:</label></p><input type="text" name="lastname" id="update-lastname">
+                   <p><label for="update-name">Имя:</label></p><input type="text" name="name" id="update-name">
+                   <p><label for="update-patro">Отчество:</label></p><input type="text" name="patro" id="update-patro">
+                   <p><label for="update-address">Адрес:</label></p><input type="text" name="address" id="update-address">
+                   <p><label for="update-phone">Номер телефона:</label></p><input type="text" name="phone" id="update-phone">
+                   <p><input type="submit" value="Отправить"></p>
+               </form>
+            </div>
+         </div>
+    </div>
+
+            </main>
+    </div>
+    <script src="https://ajax.googleapis.com/ajax/libs/jquery/2.2.0/jquery.min.js"></script>
+    <script src="{{ url_for('static', filename = 'js/writers_logic.js')}}"></script>
+</body>
+</html>

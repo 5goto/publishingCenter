@@ -1,17 +1,12 @@
-
-/*body {*/
-/*    background-color: antiquewhite;*/
+/*.icon-roll {*/
+/*    border: 3px solid #cde0ff;*/
+/*    border-radius: 10px;*/
+/*    padding: 2px;*/
 /*}*/
 
-.icon-roll {
-    border: 3px solid #cde0ff;
-    border-radius: 10px;
-    padding: 2px;
-}
-
-.body {
-    display: none;
-}
+/*.body {*/
+/*    background-color: #c5c5c5;*/
+/*}*/
 
 table {
     font-family: sans-serif;
@@ -21,6 +16,7 @@ table {
     border: 16px solid #cde0ff;
     background-color: #cde0ff;
     border-radius: 20px;
+    color: black;
 }
 
 th {
@@ -33,3 +29,132 @@ td {
     padding: 10px;
 }
 
+/*tr:hover {*/
+/*    scale: 1.1;*/
+/*}*/
+
+
+
+/*html {*/
+/*    background-color: #141414;*/
+/*}*/
+
+.content {
+    width: 70%;
+    margin: auto;
+    /*color: white;*/
+}
+
+.header {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    background-color: #B6720F;
+    height: 100px;
+    color: white;
+    border-radius: 25% 0 0 25%;
+}
+
+.logo {
+    width: 50px;
+    height: 50px;
+}
+
+.logo-with-label {
+    display: flex;
+    align-items: center;
+}
+
+.user-panel {
+    display: flex;
+    align-items: center;
+    width: 150px;
+    justify-content: space-around;
+    margin-right: 15px;
+    font-size: 20px;
+}
+
+.logo-with-label p {
+    font-size: 25px;
+
+}
+
+main {
+    margin: auto;
+    width: 90%;
+    align-content: center;
+    /*display: flex;*/
+    /*justify-content: space-between;*/
+    /*background-color: white;*/
+}
+
+
+.active{
+    scale: 1.1;
+}
+
+/*     hiden panel         */
+
+.hidden-panel {
+    display: none;
+}
+
+.redact-image {
+    width: 50px;
+}
+
+.hiden-sym {
+    font-size: 50px;
+}
+
+span {
+    font-size: 50px;
+}
+
+.admin-panel {
+    position: fixed;
+    top: 110px;
+    right: 20%;
+    z-index: 101;
+    max-width: 70%;
+    display: flex;
+    justify-content: space-around;
+    border: 3px solid;
+    border-radius: 10%;
+    background-color: #B6720F;
+}
+
+.module {
+    margin: 10px;
+}
+
+.navigation {
+    display: flex;
+    width: 40%;
+    font-size: 20px;
+    justify-content: space-between;
+    text-decoration: none;
+}
+
+.disabled {
+    pointer-events: none;
+    cursor: default;
+    color: #888;
+}
+
+form :invalid {
+    border-color: #a94442;
+    background-color: #a94442;
+}
+
+.flash {
+    padding: 10px;
+}
+.flash.success{
+    border: 1px solid #21DB56;
+    background: #AEFFC5;
+}
+.flash.error{
+    border: 1px solid #FF4343;
+    background: #FF9C9C;
+}

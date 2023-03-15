@@ -1,0 +1,111 @@
+<!DOCTYPE html>
+<html lang="ru">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link rel="stylesheet" href="{{ url_for('static', filename = 'css/styles.css')}}">
+    <title> Заказы </title>
+</head>
+<body>
+    <div class="content">
+        <div class="header">
+            <div class="logo-with-label">
+                <img src="static/img/logo.png" alt="logo" class="logo">
+                <p>Печать</p>
+            </div>
+            <nav class="navigation">
+               <a href={{url_for('books_table')}} class='disabled menu-link representative manager'>Книги</a>
+               <a href={{url_for('writers_table')}} class='disabled menu-link representative'>Писатели</a>
+               <a href={{url_for('contracts_table')}} class='disabled menu-link representative'>Контракты</a>
+               <a href={{url_for('customers_table')}} class='menu-link manager disabled'>Заказчики</a>
+               <a href={{url_for('orders_table')}} class='disabled menu-link manager'>Заказы</a>
+            </nav>
+            <div class="user-panel">
+                <p class="current-user">{{ user }}</p>
+                <a href="/logout" class="logout-link">Выйти</a>
+            </div>
+        </div>
+        <h1> Заказы </h1>
+            {% with messages = get_flashed_messages() %}
+            {% if messages %}
+        {% for cat, msg in messages %}
+            <div class="flash {{cat}}">{{ msg }}</div>
+        {% endfor %}
+            {% endif %}
+        {% endwith %}
+        <main>
+        <table class="table">
+            <thead>
+            <tr>
+                <th>#</th>
+                <th>Номер заказа</th>
+                <th>Дата регистрации</th>
+                <th>Дата выполнения</th>
+                <th>Количество экземпляров</th>
+                <th>ID заказчика</th>
+                <th>ID книги</th>
+            </tr>
+            </thead>
+            <tbody>
+            {% for item in booksList %}
+                <tr>
+                    {% for value in item %}
+                        <td>
+                        {{ value }}
+                        </td>
+                    {% endfor %}
+                </tr>
+            {% endfor %}
+            </tbody>
+        </table>
+
+        <div class="admin-panel">
+        <div class="module">
+            <div class="caption clearfix">
+               <span class="icon-roll-add">+</span>
+            </div>
+            <div class="body hidden-panel">
+               <form action="/orders?operation=add" method="post" class="books-form">
+                   <p><label for="add-number">Номер заказа:</label></p><input type="text" name="number" id="add-number">
+                   <p><label for="add-finish-date">Дата выполнения:</label></p><input type="text" name="finish-date" id="add-finish-date">
+                   <p><label for="add-quantity">Количество экземпляров:</label></p><input type="text" name="quantity" id="add-quantity">
+                   <p><label for="add-cust-id">ID заказчика:</label></p><input type="text" name="cust-id" id="add-cust-id">
+                   <p><label for="add-book-id">ID книги:</label></p><input type="text" name="book-id" id="add-book-id">
+                   <p><input type="submit" value="Отправить"></p>
+               </form>
+            </div>
+         </div>
+         <div class="module">
+            <div class="caption clearfix">
+               <span class="icon-roll-remove">-</span>
+            </div>
+            <div class="body hidden-panel">
+               <form action="/orders?operation=remove" method="post" class="books-form">
+                   <p><label for="book-title">ID:</label></p><input type="text" name="id" id="delete-id" readonly required>
+                   <p><input type="submit" value="Отправить"></p>
+               </form>
+            </div>
+         </div>
+         <div class="module">
+            <div class="caption clearfix">
+               <span class="icon-roll-remove"><img src="static/img/redact.png" alt="" class="redact-image"></span>
+            </div>
+            <div class="body hidden-panel">
+               <form action="/orders?operation=update" method="post" class="books-form">
+                   <p><label for="add-id">ID:</label></p><input type="text" name="id" id="add-id" readonly>
+                   <p><label for="update-number">Номер заказа:</label></p><input type="text" name="number" id="update-number">
+                   <p><label for="update-finish-date">Дата выполнения:</label></p><input type="text" name="finish-date" id="update-finish-date">
+                   <p><label for="update-quantity">Количество экземпляров:</label></p><input type="text" name="quantity" id="update-quantity">
+                   <p><input type="submit" value="Отправить"></p>
+               </form>
+            </div>
+         </div>
+    </div>
+
+            </main>
+    </div>
+    <script src="https://ajax.googleapis.com/ajax/libs/jquery/2.2.0/jquery.min.js"></script>
+    <script src="{{ url_for('static', filename = 'js/orders_logic.js')}}"></script>
+</body>
+</html>

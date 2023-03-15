@@ -1,5 +1,5 @@
 <!DOCTYPE html>
-<html lang="en">
+<html lang="ru">
 <head>
     <meta charset="UTF-8">
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
@@ -10,29 +10,45 @@
 <body>
     <div class="content">
         <div class="header">
-            
+            <div class="logo-with-label">
+                <img src="static/img/logo.png" alt="logo" class="logo">
+                <p>Печать</p>
+            </div>
+            <nav class="navigation">
+               <a href={{url_for('books_table')}} class='disabled menu-link representative manager'>Книги</a>
+               <a href={{url_for('writers_table')}} class='disabled menu-link representative'>Писатели</a>
+               <a href={{url_for('contracts_table')}} class='disabled menu-link representative'>Контракты</a>
+               <a href={{url_for('customers_table')}} class='menu-link manager disabled'>Заказчики</a>
+               <a href={{url_for('orders_table')}} class='disabled menu-link manager'>Заказы</a>
+            </nav>
+            <div class="user-panel">
+                <p class="current-user">{{ user }}</p>
+                <a href="/logout" class="logout-link">Выйти</a>
+            </div>
         </div>
-        <h1> Books list </h1>
-        <div class="module">
-             <div class="caption clearfix">
-                <span class="icon-roll">Добавить</span>
-             </div>
-             <div class="body hidden-panel">
-                <form action="/books" method="post" class="books-form">
-                    <p><label for="book-title">Title:<input type="text" name="title" id="book-title"></label></p>
-                    <p><label for="book-isbn">ISBN:<input type="text" name="isbn" id="book-isbn"></label></p>>
-                    <input type="submit" value="Отправить">
-                </form>
-             </div>
-          </div>
-
-        <table>
+        <h1> Книги </h1>
+        <main>
+        {% with messages = get_flashed_messages() %}
+            {% if messages %}
+        {% for cat, msg in messages %}
+            <div class="flash {{cat}}">{{ msg }}</div>
+        {% endfor %}
+            {% endif %}
+        {% endwith %}
+        <table class="table">
+            <thead>
             <tr>
                 <th>#</th>
-                <th>Title</th>
                 <th>ISBN</th>
-                <th>FK</th>
+                <th>Название</th>
+                <th>Количество копий</th>
+                <th>Дата публикации</th>
+                <th>Себестоимость</th>
+                <th>Цена продажи</th>
+                <th>Гонорар</th>
             </tr>
+            </thead>
+            <tbody>
             {% for item in booksList %}
                 <tr>
                     {% for value in item %}
@@ -42,9 +58,86 @@
                     {% endfor %}
                 </tr>
             {% endfor %}
+            </tbody>
         </table>
-            <script src="https://ajax.googleapis.com/ajax/libs/jquery/2.2.0/jquery.min.js"></script>
-            <script src="{{ url_for('static', filename = 'js/storeHandler.js')}}"></script>
+
+        <div class="admin-panel">
+        <div class="module">
+            <div class="caption clearfix">
+               <span class="icon-roll-add">+</span>
+            </div>
+            <div class="body hidden-panel">
+               <form action="/books?operation=add" method="post" class="books-form" id="add-book-form">
+                   <p><label for="add-book-isbn">ISBN:</label></p><input type="text" name="book-isbn" id="add-book-isbn" required>
+                   <p><label for="add-book-title">Название:</label></p><input type="text" name="book-title" id="add-book-title" required>
+                   <p><label for="add-book-copy">Количество:</label></p><input type="text" name="book-copy" id="add-book-copy" required>
+                   <p><label for="add-book-date_pub">Дата публикации:</label></p><input type="text" name="book-date_pub" id="add-book-date_pub" required>
+                   <p><label for="add-book-cost">Себестоимость:</label></p><input type="text" name="book-cost" id="add-book-cost" required>
+                   <p><label for="add-book-price">Цена продажи:</label></p><input type="text" name="book-price" id="add-book-price" required>
+                   <p><label for="add_autor_id">ID автора:</label></p><input type="text" name="autor" id="add_autor_id" required>
+                   <br>
+
+                   <p><input type="submit" value="Отправить"></p>
+               </form>
+            </div>
+         </div>
+         <div class="module">
+            <div class="caption clearfix">
+               <span class="icon-roll-remove">-</span>
+            </div>
+            <div class="body hidden-panel">
+               <form action="/books?operation=remove" method="post" class="remove-books-form">
+                   <p><label for="book-id">ID:</label></p><input type="text" name="title" id="book-id" required readonly>
+                   <p><input type="submit" value="Отправить"></p>
+               </form>
+            </div>
+         </div>
+         <div class="module">
+            <div class="caption clearfix">
+               <span class="icon-roll-remove"><img src="static/img/redact.png" alt="" class="redact-image"></span>
+            </div>
+            <div class="body hidden-panel">
+               <form action="/books?operation=update" method="post" class="update-books-form">
+                   <p><label for="update-book-id">ID:</label></p><input type="text" name="book-id" id="update-book-id" class="update-book-id" readonly required>
+                   <p><label for="update-book-isbn">ISBN:</label></p><input type="text" name="book-isbn" id="update-book-isbn" class="update-book-isbn" required>
+                   <p><label for="update-book-title">Название:</label></p><input type="text" name="book-title" id="update-book-title" required>
+                   <p><label for="update-book-copy">Количество:</label></p><input type="text" name="book-copy" id="update-book-copy" required>
+                   <p><label for="update-book-date_pub">Дата публикации:</label></p><input type="text" name="book-date_pub" id="update-book-date_pub" required>
+                   <p><label for="update-book-cost">Себестоимость:</label></p><input type="text" name="book-cost" id="update-book-cost" required>
+                   <p><label for="update-book-price">Цена продажи:</label></p><input type="text" name="book-price" id="update-book-price" required>
+                   <p><input type="submit" value="Отправить"></p>
+               </form>
+            </div>
+         </div>
+            <div class="module">
+                <div class="caption clearfix">
+               <span class="icon-roll-remove"><img src="static/img/autor.png" alt="" class="redact-image"></span>
+            </div>
+                <div class="body hidden-panel">
+               <form action="/books?operation=add_autor" method="post" class="add-autor-form">
+                   <p><label for="book-id-autor">ID книги:</label></p><input type="text" name="book_id" id="book-id-autor" required readonly>
+                   <p><label for="autor-id">ID автора:</label></p><input type="text" name="autor_id" id="autor-id" required>
+                   <p><input type="submit" value="Отправить"></p>
+               </form>
+            </div>
+            </div>
+            <div class="module">
+                <div class="caption clearfix">
+               <span class="icon-roll-remove"><img src="static/img/autor_del.png" alt="" class="redact-image"></span>
+            </div>
+                <div class="body hidden-panel">
+               <form action="/books?operation=remove_autor" method="post" class="delete-autor-form">
+                   <p><label for="book-id-autor-remove">ID книги:</label></p><input type="text" name="book_id" id="book-id-autor-remove" required readonly>
+                   <p><label for="autor-id-remove">ID автора:</label></p><input type="text" name="autor_id" id="autor-id-remove" required>
+                   <p><input type="submit" value="Отправить"></p>
+               </form>
+            </div>
+            </div>
     </div>
+
+            </main>
+    </div>
+    <script src="https://ajax.googleapis.com/ajax/libs/jquery/2.2.0/jquery.min.js"></script>
+    <script src="{{ url_for('static', filename = 'js/storeHandler.js')}}"></script>
 </body>
 </html>

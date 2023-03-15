@@ -1,0 +1,24 @@
+
+
+.list-refs {
+    list-style-type: none;
+    display: flex;
+    flex-direction: column;
+}
+
+
+li {
+    width: 70%;
+    height: 100px;
+    border: 2px solid;
+    text-align: center;
+    margin-bottom: 20px;
+
+    font-size: 20px;
+}
+
+.disabled {
+    pointer-events: none;
+    cursor: default;
+    color: #888;
+}
