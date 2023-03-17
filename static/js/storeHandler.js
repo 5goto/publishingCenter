@@ -22,6 +22,18 @@ $('.icon-roll-remove').click(function() {
     }
     });
 
+$('.icon-roll-add-dell').click(function() {
+    var $body = $(this).closest('.module').find('.body');
+    console.log($body);
+    if ($body.is(':hidden')) {
+        $body.show();
+        renderAuthorsTable();
+    } else {
+        $body.hide();
+        $("#authors").empty()
+    }
+    });
+
 // Выделение строк в таблице
 
 function formatMoneyStr(str) {
@@ -79,6 +91,25 @@ $.getJSON("/books?user=true", "", (data) => {
         $('.menu-link').removeClass("disabled");
     }
 })
+
+function renderAuthorsTable() {
+    $.getJSON("/books?authors=true", "", (data) => {
+    const currentData = JSON.parse(data.authors)
+
+    let content = "<table class=\"table\">"
+    for(item of currentData){
+          content += '<tr><th>#</th><th>Серия паспорта</th><th>Номер паспорта</th><th>Фамилия</th><th>Имя</th><th>Отчество</th><th>Адрес</th><th>Номер телефона</th> <th>ID контракта</th> </tr>'
+        content += '<tr>';
+        for(row of item) {
+            content += '<td>' + `${row}` + '</td>'
+        }
+        content += '</tr>';
+    }
+    content += "</table>";
+        console.log(content);
+$('#authors').append(content);
+})
+}
 
 // Валидация корректности формы
 

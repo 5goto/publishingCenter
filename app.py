@@ -30,9 +30,10 @@ def index():  # put application's code here
 def books_table():  # put application's code here
     if request.args.get("user"):
         return json.dumps({"user": current_user.get_username()})
+    if request.args.get("authors"):
+        return json.dumps({"authors": json.dumps(bd_repo.getAllWriters())})
 
     if request.method == "POST":
-        # bd_repo.deleteWriterById(3)
         if request.args.get("operation") == "add":
             data = request.form.to_dict()
             op_result = bd_repo.addBook(data)
