@@ -4,19 +4,23 @@
 /*    padding: 2px;*/
 /*}*/
 
-/*.body {*/
-/*    background-color: #c5c5c5;*/
+/*body {*/
+/*    background-color: #dcdbdb;*/
 /*}*/
 
+
 table {
+    margin: auto;
     font-family: sans-serif;
     text-align: left;
     border-collapse: separate;
     border-spacing: 5px;
-    border: 16px solid #cde0ff;
-    background-color: #cde0ff;
+    border: 16px solid;
+    background-color: #cbcbcb;
     border-radius: 20px;
     color: black;
+    min-width: 1200px;
+
 }
 
 th {
@@ -25,7 +29,7 @@ th {
 }
 
 td {
-    background-color: #dbe7ff;
+    /*background-color: #dbe7ff;*/
     padding: 10px;
 }
 
@@ -43,17 +47,32 @@ td {
     width: 70%;
     margin: auto;
     /*color: white;*/
+    border: 16px solid;
+    min-height: 800px;
+    background-color: #dcdbdb;
 }
 
 .header {
     display: flex;
     justify-content: space-between;
     align-items: center;
-    background-color: #B6720F;
+    /*background-color: #B6720F;*/
     height: 100px;
-    color: white;
-    border-radius: 25% 0 0 25%;
+    /*color: white;*/
+    border-bottom: 16px solid;
+    /*border-radius: 25% 0 0 25%;*/
 }
+
+.header a:visited{
+    color: #141414;
+}
+.header a:hover{
+    color: #a94442;
+}
+
+/*.admin-panel:hover{*/
+/*    background-color: #a94442;*/
+/*}*/
 
 .logo {
     width: 50px;
@@ -75,7 +94,7 @@ td {
 }
 
 .logo-with-label p {
-    font-size: 25px;
+    font-size: 2em;
 
 }
 
@@ -119,9 +138,9 @@ span {
     max-width: 70%;
     display: flex;
     justify-content: space-around;
-    border: 3px solid;
+    border: 16px black;
     border-radius: 10%;
-    background-color: #B6720F;
+    background-color: #cbcbcb;
 }
 
 .module {
@@ -131,7 +150,7 @@ span {
 .navigation {
     display: flex;
     width: 40%;
-    font-size: 20px;
+    font-size: 1.5em;
     justify-content: space-between;
     text-decoration: none;
 }
@@ -157,4 +176,17 @@ form :invalid {
 .flash.error{
     border: 1px solid #FF4343;
     background: #FF9C9C;
+}
+
+@media screen and (max-width: 1300px) {
+    .content{
+        width: 90%;
+    }
+    .admin-panel {
+        position: static;
+        margin: auto;
+    }
+    .navigation{
+        font-size: 1em;
+    }
 }

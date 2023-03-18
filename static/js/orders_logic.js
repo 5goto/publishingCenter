@@ -1,14 +1,22 @@
 
 
-
+var rendered = false;
 // Панель администрирования
 $('.icon-roll-add').click(function() {
     var $body = $(this).closest('.module').find('.body');
     console.log($body);
     if ($body.is(':hidden')) {
         $body.show();
+        if (!rendered) {
+            renderBooksTable();
+            renderCustomerTable();
+            rendered = true;
+        }
     } else {
         $body.hide();
+        $("#books").empty();
+        $("#customer").empty();
+        rendered = false;
     }
     });
 
@@ -63,6 +71,43 @@ $.getJSON("/books?user=true", "", (data) => {
         $('.menu-link').removeClass("disabled");
     }
 })
+
+function renderBooksTable() {
+    $.getJSON("/orders?books=true", "", (data) => {
+    const currentData = JSON.parse(data.books)
+
+    let content = "<table class=\"table\">"
+        content += '<tr><th>#</th><th>ISBN</th><th>Название</th><th>Количество копий</th><th>Дата публикации</th><th>Себестоимость</th><th>Цена продажи</th><th>Гонорар</th></tr>'
+    for(item of currentData){
+        content += '<tr>';
+        for(row of item) {
+            content += '<td>' + `${row}` + '</td>'
+        }
+        content += '</tr>';
+    }
+    content += "</table>";
+$('#books').append(content);
+})
+}
+
+function renderCustomerTable() {
+    $.getJSON("/orders?customers=true", "", (data) => {
+    const currentData = JSON.parse(data.customers)
+        console.log(data.customers)
+        console.log("*****************")
+    let content = "<table class=\"table\">"
+        content += '<tr><th>#</th><th>Организация</th><th>Фамилия</th><th>Имя</th><th>Отчество</th><th>Адрес</th><th>Телефон</th></tr>'
+    for(item of currentData){
+        content += '<tr>';
+        for(row of item) {
+            content += '<td>' + `${row}` + '</td>'
+        }
+        content += '</tr>';
+    }
+    content += "</table>";
+$('#customer').append(content);
+})
+}
 
 $('input[name=number]').on('input', function (event) {
     if(/^[1-9]{1}[0-9]{4}$/i.test(event.target.value)  && Number(event.target.value) !== 0) {

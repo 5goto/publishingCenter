@@ -3,7 +3,6 @@
 // Панель администрирования
 $('.icon-roll-add').click(function() {
     var $body = $(this).closest('.module').find('.body');
-    console.log($body);
     if ($body.is(':hidden')) {
         $body.show();
     } else {
@@ -14,7 +13,6 @@ $('.icon-roll-add').click(function() {
 
 $('.icon-roll-remove').click(function() {
     var $body = $(this).closest('.module').find('.body');
-    console.log($body);
     if ($body.is(':hidden')) {
         $body.show();
     } else {
@@ -22,15 +20,20 @@ $('.icon-roll-remove').click(function() {
     }
     });
 
+var rendered = false;
+
 $('.icon-roll-add-dell').click(function() {
     var $body = $(this).closest('.module').find('.body');
-    console.log($body);
     if ($body.is(':hidden')) {
         $body.show();
-        renderAuthorsTable();
+        if (!rendered) {
+            renderAuthorsTable();
+            rendered = true;
+        }
     } else {
         $body.hide();
-        $("#authors").empty()
+        $("#authors").empty();
+        rendered = false;
     }
     });
 
@@ -73,11 +76,13 @@ $(document).ready(function(){
         $("#update-book-price").attr("value", formatMoneyStr($.trim(target[6].textContent)))
         // $("#update-book-sum").attr("value", $.trim(target[7].textContent))
 
+        $("#book-id-autor").attr("value", $.trim(target[0].textContent))
         $("#book-id-autor-remove").attr("value", $.trim(target[0].textContent))
 
 
 	});
 });
+
 
 // Валидация ссылок по текущему пользователю
 $.getJSON("/books?user=true", "", (data) => {
@@ -97,8 +102,8 @@ function renderAuthorsTable() {
     const currentData = JSON.parse(data.authors)
 
     let content = "<table class=\"table\">"
+        content += '<tr><th>#</th><th>Серия паспорта</th><th>Номер паспорта</th><th>Фамилия</th><th>Имя</th><th>Отчество</th><th>Адрес</th><th>Номер телефона</th> <th>ID контракта</th> </tr>'
     for(item of currentData){
-          content += '<tr><th>#</th><th>Серия паспорта</th><th>Номер паспорта</th><th>Фамилия</th><th>Имя</th><th>Отчество</th><th>Адрес</th><th>Номер телефона</th> <th>ID контракта</th> </tr>'
         content += '<tr>';
         for(row of item) {
             content += '<td>' + `${row}` + '</td>'
@@ -144,7 +149,7 @@ $('input[name=book-isbn]').on('input', function (event) {
     if(/^\d{3}-{1}\d{1}-{1}\d{2}-{1}\d{6}-{1}\d{1}$/.test(event.target.value)) {
         event.target.setCustomValidity('');
     } else {
-        event.target.setCustomValidity('Строка - латиница и кириллица');
+        event.target.setCustomValidity('xxx-x-xx-xxxxxx-x');
         $('.books-form input[type=submit]').event.preventDefault();
     }
 });

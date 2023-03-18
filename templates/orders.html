@@ -35,31 +35,6 @@
             {% endif %}
         {% endwith %}
         <main>
-        <table class="table">
-            <thead>
-            <tr>
-                <th>#</th>
-                <th>Номер заказа</th>
-                <th>Дата регистрации</th>
-                <th>Дата выполнения</th>
-                <th>Количество экземпляров</th>
-                <th>ID заказчика</th>
-                <th>ID книги</th>
-            </tr>
-            </thead>
-            <tbody>
-            {% for item in booksList %}
-                <tr>
-                    {% for value in item %}
-                        <td>
-                        {{ value }}
-                        </td>
-                    {% endfor %}
-                </tr>
-            {% endfor %}
-            </tbody>
-        </table>
-
         <div class="admin-panel">
         <div class="module">
             <div class="caption clearfix">
@@ -102,6 +77,37 @@
             </div>
          </div>
     </div>
+        <table class="table">
+            <thead>
+            <tr>
+                <th>#</th>
+                <th>Номер заказа</th>
+                <th>Дата регистрации</th>
+                <th>Дата выполнения</th>
+                <th>Количество экземпляров</th>
+                <th>ID заказчика</th>
+                <th>ID книги</th>
+            </tr>
+            </thead>
+            <tbody>
+            {% for item in booksList %}
+                <tr>
+                    {% for value in item %}
+                        <td>
+                        {{ value }}
+                        </td>
+                    {% endfor %}
+                </tr>
+            {% endfor %}
+            </tbody>
+        </table>
+            <div id="books">
+
+            </div>
+            <div id="customer">
+
+            </div>
+
 
             </main>
     </div>

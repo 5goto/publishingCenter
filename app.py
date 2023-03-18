@@ -81,8 +81,12 @@ def writers_table():  # put application's code here
 @app.route('/orders', methods=["POST", "GET"])
 @login_required
 def orders_table():  # put application's code here
+    if request.args.get("books"):
+        return json.dumps({"books": json.dumps(bd_repo.getAllBooks(), indent=4, sort_keys=True, default=str)})
+    if request.args.get("customers"):
+        return json.dumps({"customers": json.dumps(bd_repo.getAllCustomers(), indent=4, sort_keys=True, default=str)})
+
     if request.method == "POST":
-        # bd_repo.deleteWriterById(3)
         if request.args.get("operation") == "add":
             data = request.form.to_dict()
             op_result = bd_repo.addOrder(data)
@@ -102,6 +106,8 @@ def orders_table():  # put application's code here
 @app.route('/customers', methods=["POST", "GET"])
 @login_required
 def customers_table():  # put application's code here
+    if request.args.get("books"):
+        return json.dumps({"books": json.dumps(bd_repo.getAllBooks(), indent=4, sort_keys=True, default=str)})
     if request.method == "POST":
         # bd_repo.deleteWriterById(3)
         if request.args.get("operation") == "add":

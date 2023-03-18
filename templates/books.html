@@ -27,42 +27,6 @@
             </div>
         </div>
         <h1> Книги </h1>
-        <main>
-        {% with messages = get_flashed_messages() %}
-            {% if messages %}
-        {% for cat, msg in messages %}
-            <div class="flash {{cat}}">{{ msg }}</div>
-        {% endfor %}
-            {% endif %}
-        {% endwith %}
-        <table class="table">
-            <thead>
-            <tr>
-                <th>#</th>
-                <th>ISBN</th>
-                <th>Название</th>
-                <th>Количество копий</th>
-                <th>Дата публикации</th>
-                <th>Себестоимость</th>
-                <th>Цена продажи</th>
-                <th>Гонорар</th>
-            </tr>
-            </thead>
-            <tbody>
-            {% for item in booksList %}
-                <tr>
-                    {% for value in item %}
-                        <td>
-                        {{ value }}
-                        </td>
-                    {% endfor %}
-                </tr>
-            {% endfor %}
-            </tbody>
-        </table>
-            <div id="authors">
-
-            </div>
 
         <div class="admin-panel">
         <div class="module">
@@ -137,6 +101,45 @@
             </div>
             </div>
     </div>
+
+        <main>
+        {% with messages = get_flashed_messages() %}
+            {% if messages %}
+        {% for cat, msg in messages %}
+            <div class="flash {{cat}}">{{ msg }}</div>
+        {% endfor %}
+            {% endif %}
+        {% endwith %}
+        <table class="table">
+            <thead>
+            <tr>
+                <th>#</th>
+                <th>ISBN</th>
+                <th>Название</th>
+                <th>Количество копий</th>
+                <th>Дата публикации</th>
+                <th>Себестоимость</th>
+                <th>Цена продажи</th>
+                <th>Гонорар</th>
+            </tr>
+            </thead>
+            <tbody>
+            {% for item in booksList %}
+                <tr>
+                    {% for value in item %}
+                        <td>
+                        {{ value }}
+                        </td>
+                    {% endfor %}
+                </tr>
+            {% endfor %}
+            </tbody>
+        </table>
+            <div id="authors">
+
+            </div>
+
+
 
             </main>
     </div>

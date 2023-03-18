@@ -1,13 +1,20 @@
 
-
+var rendered = false;
 // Панель администрирования
 $('.icon-roll-add').click(function() {
     var $body = $(this).closest('.module').find('.body');
     console.log($body);
     if ($body.is(':hidden')) {
         $body.show();
+        if (!rendered) {
+            renderBooksTable();
+            renderCustomerTable();
+            rendered = true;
+        }
     } else {
         $body.hide();
+        $("#books").empty();
+        rendered = false;
     }
     });
 
@@ -61,6 +68,24 @@ $.getJSON("/books?user=true", "", (data) => {
         $('.menu-link').removeClass("disabled");
     }
 })
+
+function renderBooksTable() {
+    $.getJSON("/orders?books=true", "", (data) => {
+    const currentData = JSON.parse(data.books)
+
+    let content = "<table class=\"table\">"
+        content += '<tr><th>#</th><th>ISBN</th><th>Название</th><th>Количество копий</th><th>Дата публикации</th><th>Себестоимость</th><th>Цена продажи</th><th>Гонорар</th></tr>'
+    for(item of currentData){
+        content += '<tr>';
+        for(row of item) {
+            content += '<td>' + `${row}` + '</td>'
+        }
+        content += '</tr>';
+    }
+    content += "</table>";
+$('#books').append(content);
+})
+}
 
 $('input[name=title]').on('input', function (event) {
     if(/^[0-9A-ZА-ЯЁ]+$/i.test(event.target.value) && event.target.value.length <= 64) {
