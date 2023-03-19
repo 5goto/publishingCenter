@@ -21,8 +21,21 @@ def load_user(id):
 def index():  # put application's code here
     if request.args.get("user"):
         return json.dumps({"user": current_user.get_username()})
-
     return render_template('index.html', title="Таблицы", user=current_user.get_username())
+
+
+@app.route('/year_result', methods=["POST", "GET"])
+@login_required
+def year_result():  # put application's code here
+    if request.method == "POST":
+        if request.args.get("operation") == "result":
+            request_data = json.loads(request.get_data())
+            print(request_data)
+            result = bd_repo.getYearResult(request_data)
+            return json.dumps({"data": result})
+    if request.args.get("user"):
+        return json.dumps({"user": current_user.get_username()})
+    return render_template('year_result.html', title="Прибыль", user=current_user.get_username())
 
 
 @app.route('/books', methods=["POST", "GET"])
@@ -170,4 +183,3 @@ def logout():
 
 if __name__ == '__main__':
     app.run(debug=True)
-

@@ -16,11 +16,15 @@ table {
     border-collapse: separate;
     border-spacing: 5px;
     border: 16px solid;
-    background-color: #cbcbcb;
+    /*background-color: #cbcbcb;*/
     border-radius: 20px;
     color: black;
     min-width: 1200px;
 
+}
+
+form p {
+    font-size: 1.2em;
 }
 
 th {
@@ -29,15 +33,43 @@ th {
 }
 
 td {
-    /*background-color: #dbe7ff;*/
+    background-color: #cbcbcb;
     padding: 10px;
+    border: 2px solid;
+}
+
+td[colspan='5'] {
+    background-color: white;
+    border: 0;
+}
+
+td[colspan='4'] {
+    background-color: white;
+    border: 0;
+    border-bottom: 2px solid;
+}
+
+tr:hover td{
+    background-color: #b0c9ff;
+}
+
+.warning_message {
+    font-size: 3em;
+    margin: auto;
 }
 
 /*tr:hover {*/
 /*    scale: 1.1;*/
 /*}*/
 
-
+input {
+	width: 300px;
+	font-size: 1.2em;
+	padding: 6px 0 4px 10px;
+	border: 1px solid #cecece;
+	background: #F6F6f6;
+	border-radius: 8px;
+}
 
 /*html {*/
 /*    background-color: #141414;*/
@@ -49,25 +81,36 @@ td {
     /*color: white;*/
     border: 16px solid;
     min-height: 800px;
-    background-color: #dcdbdb;
+    /*background-color: #dcdbdb;*/
 }
 
 .header {
     display: flex;
     justify-content: space-between;
     align-items: center;
-    /*background-color: #B6720F;*/
+    /*background-color: #b0c9ff;*/
     height: 100px;
     /*color: white;*/
     border-bottom: 16px solid;
     /*border-radius: 25% 0 0 25%;*/
 }
 
+.header.disabled a:visited{
+    color: grey;
+}
+
+
 .header a:visited{
     color: #141414;
 }
 .header a:hover{
-    color: #a94442;
+    color: #b0c9ff;
+}
+
+
+
+input:hover {
+    background-color: #b0c9ff;
 }
 
 /*.admin-panel:hover{*/
@@ -82,6 +125,10 @@ td {
 .logo-with-label {
     display: flex;
     align-items: center;
+}
+
+.logo-with-label a {
+    font-size: 2em;
 }
 
 .user-panel {
@@ -110,6 +157,12 @@ main {
 
 .active{
     scale: 1.1;
+}
+
+
+
+.active td{
+        background-color: #b0c9ff;
 }
 
 /*     hiden panel         */
@@ -168,6 +221,7 @@ form :invalid {
 
 .flash {
     padding: 10px;
+    max-width: 30%;
 }
 .flash.success{
     border: 1px solid #21DB56;
@@ -178,7 +232,7 @@ form :invalid {
     background: #FF9C9C;
 }
 
-@media screen and (max-width: 1300px) {
+@media screen and (max-width: 1720px) {
     .content{
         width: 90%;
     }

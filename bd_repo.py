@@ -200,11 +200,14 @@ def addBook(data):
     if (writersWithCurrentId):
         fee = (int(data['book-price']) - int(data['book-cost'])) * int(data['book-copy'])
 
-        cursor.execute(f'''INSERT INTO books (book_cipher, book_name, circulation, date_of_publication, cost_price, selling_price, fee)
-         VALUES
-          (%s, %s, %s, %s, %s, %s, %s)''', (
-        data['book-isbn'], data['book-title'], int(data['book-copy']), data['book-date_pub'], int(data['book-cost']),
-        int(data['book-price']), fee))
+        try:
+            cursor.execute(f'''INSERT INTO books (book_cipher, book_name, circulation, date_of_publication, cost_price, selling_price, fee)
+             VALUES
+              (%s, %s, %s, %s, %s, %s, %s)''', (
+            data['book-isbn'], data['book-title'], int(data['book-copy']), data['book-date_pub'], int(data['book-cost']),
+            int(data['book-price']), fee))
+        except psycopg2.errors.DatetimeFieldOverflow:
+            return [u'error', u'Указан неверный формат времени']
 
         cipher = data['book-isbn']
         cursor.execute(f"SELECT book_id FROM books WHERE book_cipher = '{cipher}';")
@@ -670,3 +673,59 @@ def checkDate(current, next):
         return False
     else:
         return True
+
+
+def getYearResult(date_dictionary):
+    conn = psycopg2.connect(dbname="publishing_center", user="postgres", password="postgrepass",
+                            host=r"localhost")
+    if checkDate(date_dictionary['start'], date_dictionary['end']):
+        return False
+
+    cursor = conn.cursor()
+    cursor.execute('SELECT * FROM orders')
+    all_orders = cursor.fetchall()
+
+    start_date = splitAndReturnDate(date_dictionary['start'])
+    end_date = splitAndReturnDate(date_dictionary['end'])
+    flitred_orders = filterByDate(all_orders, start_date, end_date)
+
+    result_list = []
+    for order in flitred_orders:
+        row = {}
+
+        cursor.execute(f'SELECT legal_name FROM customers WHERE customer_id = {order[5]} LIMIT 1')
+        customer_name = cursor.fetchall()[0][0]
+
+        number_of_book_copies = order[4]
+
+        cursor.execute(f'SELECT book_name, cost_price, selling_price FROM books WHERE book_id = {order[6]}')
+        book = cursor.fetchall()
+        book_name = book[0][0]
+        cost = book[0][1].replace('\xa0', '').split(',')[0]
+        price = book[0][2].replace('\xa0', '').split(',')[0]
+
+        final_money = (int(price) - int(cost)) * int(number_of_book_copies)
+
+        for item in result_list:
+            if customer_name in item.keys():
+                item[customer_name].append([book_name, cost, price, number_of_book_copies, str(final_money)])
+                break
+        else:
+            row[customer_name] = [[book_name, cost, price, number_of_book_copies, str(final_money)]]
+            result_list.append(row)
+
+    print(result_list)
+
+    cursor.close()
+    conn.close()
+    return result_list
+
+def filterByDate(orders_list: list, start_date, end_date):
+    return filter(lambda x: start_date <= x[3] <= end_date, orders_list)
+
+def splitAndReturnDate(date_str: str):
+    splitted_curr = date_str.split('-')
+    return datetime.date(int(splitted_curr[0]), int(splitted_curr[1]), int(splitted_curr[2]))
+
+def makeStringifyObject(inputList: list):
+    pass

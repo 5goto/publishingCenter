@@ -1,0 +1,53 @@
+<!DOCTYPE html>
+<html lang="ru">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link rel="stylesheet" href="{{ url_for('static', filename = 'css/styles.css')}}">
+    <title> {{ title }} </title>
+</head>
+<body>
+    <div class="content">
+        <div class="header">
+            <div class="logo-with-label">
+                <img src="static/img/logo.png" alt="logo" class="logo">
+                <p><a href={{url_for('index')}}>Печать</a></p>
+            </div>
+            <nav class="navigation">
+               <a href={{url_for('books_table')}} class='disabled menu-link representative manager'>Книги</a>
+               <a href={{url_for('writers_table')}} class='disabled menu-link representative'>Писатели</a>
+               <a href={{url_for('contracts_table')}} class='disabled menu-link representative'>Контракты</a>
+               <a href={{url_for('customers_table')}} class='menu-link manager disabled'>Заказчики</a>
+               <a href={{url_for('orders_table')}} class='disabled menu-link manager'>Заказы</a>
+            </nav>
+            <div class="user-panel">
+                <p class="current-user">{{ user }}</p>
+                <a href="/logout" class="logout-link">Выйти</a>
+            </div>
+        </div>
+        <h1> Прибыль за указанный период времени </h1>
+
+        <main>
+        {% with messages = get_flashed_messages() %}
+            {% if messages %}
+        {% for cat, msg in messages %}
+            <div class="flash {{cat}}">{{ msg }}</div>
+        {% endfor %}
+            {% endif %}
+        {% endwith %}
+            <form action="/year_result?operation=result" method="get" class="input_date_form">
+              <p><label for="start_id">Начало периода:</label></p>
+              <input type="date" name="start" id="start_id" required />
+              <p><label for="end_id">Конец периода:</label></p>
+              <input type="date" name="end" id="end_id" required />
+              <p><input id="in_button" type="submit" value="Отправить" /></p>
+            </form>
+
+            <div id="result"></div>
+            </main>
+    </div>
+    <script src="https://ajax.googleapis.com/ajax/libs/jquery/2.2.0/jquery.min.js"></script>
+    <script src="{{ url_for('static', filename = 'js/result_logic.js')}}"></script>
+</body>
+</html>
