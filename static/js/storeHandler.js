@@ -65,7 +65,7 @@ $(document).ready(function(){
         $("#add-book-date_pub").attr("value", $.trim(target[4].textContent))
         $("#add-book-cost").attr("value", formatMoneyStr($.trim(target[5].textContent)))
         $("#add-book-price").attr("value", formatMoneyStr($.trim(target[6].textContent)))
-        // $("#add-book-sum").attr("value", $.trim(target[7].textContent))
+        $("#add-book-fee").attr("value", formatMoneyStr($.trim(target[7].textContent)))
 
         $("#update-book-id").attr("value", $.trim(target[0].textContent))
         $("#update-book-isbn").attr("value", $.trim(target[1].textContent))
@@ -74,7 +74,7 @@ $(document).ready(function(){
         $("#update-book-date_pub").attr("value", $.trim(target[4].textContent))
         $("#update-book-cost").attr("value", formatMoneyStr($.trim(target[5].textContent)))
         $("#update-book-price").attr("value", formatMoneyStr($.trim(target[6].textContent)))
-        // $("#update-book-sum").attr("value", $.trim(target[7].textContent))
+        $("#update-book-fee").attr("value", formatMoneyStr($.trim(target[7].textContent)))
 
         $("#book-id-autor").attr("value", $.trim(target[0].textContent))
         $("#book-id-autor-remove").attr("value", $.trim(target[0].textContent))
@@ -136,7 +136,17 @@ $('#autor-id-remove').on('input', function (event) {
     }
 });
 
+
 $('#autor-id').on('input', function (event) {
+    if(/^[0-9]+$/i.test(event.target.value)) {
+        event.target.setCustomValidity('');
+    } else {
+        event.target.setCustomValidity('Только целые числа');
+        $('.add-autor-form input[type=submit]').event.preventDefault();
+    }
+});
+
+$('input[name=book-fee]').on('input', function (event) {
     if(/^[0-9]+$/i.test(event.target.value)) {
         event.target.setCustomValidity('');
     } else {

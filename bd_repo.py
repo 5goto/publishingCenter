@@ -199,13 +199,15 @@ def addBook(data):
 
     if (writersWithCurrentId):
         fee = (int(data['book-price']) - int(data['book-cost'])) * int(data['book-copy'])
+        if int(data['book-fee']) - fee > 0:
+            return [u'error', u'Гонорар писателей не должен превышать суммарную прибыль от производства']
 
         try:
             cursor.execute(f'''INSERT INTO books (book_cipher, book_name, circulation, date_of_publication, cost_price, selling_price, fee)
              VALUES
               (%s, %s, %s, %s, %s, %s, %s)''', (
             data['book-isbn'], data['book-title'], int(data['book-copy']), data['book-date_pub'], int(data['book-cost']),
-            int(data['book-price']), fee))
+            int(data['book-price']), data['book-fee']))
         except psycopg2.errors.DatetimeFieldOverflow:
             return [u'error', u'Указан неверный формат времени']
 
@@ -449,11 +451,13 @@ def changeBook(data):
         return [u'error', u'Указанные ISBN книги уже существует']
     else:
         fee = (int(data['book-price']) - int(data['book-cost'])) * int(data['book-copy'])
+        if int(data['book-fee']) - fee > 0:
+            return [u'error', u'Гонорар писателей не должен превышать суммарную прибыль от производства']
 
         cursor.execute(
             f'''UPDATE books SET book_cipher = %s, book_name = %s, circulation = %s, date_of_publication = %s, cost_price = %s, selling_price = %s, fee = %s WHERE book_id = {int(data['book-id'])}''',
             (data['book-isbn'], data['book-title'], int(data['book-copy']), data['book-date_pub'],
-             int(data['book-cost']), int(data['book-price']), fee))
+             int(data['book-cost']), int(data['book-price']), data['book-fee']))
         conn.commit()
         cursor.close()
         conn.close()
