@@ -47,6 +47,8 @@ def books_table():  # put application's code here
         return json.dumps({"authors": json.dumps(bd_repo.getAllWriters())})
 
     if request.method == "POST":
+        printed = request.form.to_dict()
+        print("Book: ", printed)
         if request.args.get("operation") == "add":
             data = request.form.to_dict()
             op_result = bd_repo.addBook(data)
