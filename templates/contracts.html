@@ -38,12 +38,12 @@
         <div class="admin-panel">
         <div class="module">
             <div class="caption clearfix">
-               <span class="icon-roll-add">+</span>
+               <span class="icon-roll-add"><img src="static/img/add.png" alt="" class="redact-image"></span>
             </div>
             <div class="body hidden-panel">
                <form action="/contracts?operation=add" method="post" class="contracts-form" id="add-contract-form">
                    <p><label for="add-contract-num">Номер контракта:</label></p><input type="text" name="contract-num" id="add-contract-num">
-                   <p><label for="add-date_start">Дата заключения:</label></p><input type="text" name="date_start" id="add-date_start">
+                   <p><label for="add-date_start">Дата заключения:</label></p><input type="date" name="date_start" id="add-date_start">
                    <p><label for="add-validity">Срок действия:</label></p><input type="text" name="validity" id="add-validity">
                    <hr>
                    <p><label for="add-seria">Серия:</label></p><input type="text" name="seria" id="add-seria">
@@ -59,7 +59,7 @@
          </div>
          <div class="module">
             <div class="caption clearfix">
-               <span class="icon-roll-remove">-</span>
+               <span class="icon-roll-remove"><img src="static/img/delete.png" alt="" class="redact-image"></span>
             </div>
             <div class="body hidden-panel">
                <form action="/contracts?operation=remove" method="post" class="contracts-form">
@@ -76,9 +76,9 @@
                <form action="/contracts?operation=update" method="post" class="contracts-form">
                    <p><label for="update-contract-id">ID:</label></p><input type="text" name="title" id="update-contract-id" readonly>
                    <p><label for="update-contract-num">Номер контракта:</label></p><input type="text" name="contract-num" id="update-contract-num">
-                   <p><label for="update-date_start">Дата заключения:</label></p><input type="text" name="date_start" id="update-date_start">
+                   <p><label for="update-date_start">Дата заключения:</label></p><input type="date" name="date_start" id="update-date_start">
                    <p><label for="update-validity">Срок действия:</label></p><input type="text" name="validity" id="update-validity">
-                   <p><label for="update-date_of_completion">Дата выполнения:</label></p><input type="text" name="date_of_completion" id="update-date_of_completion" readonly>
+                   <p><label for="update-date_of_completion">Дата выполнения:</label></p><input type="date" name="date_of_completion" id="update-date_of_completion" readonly>
                    <p><input type="submit" value="Отправить"></p>
                </form>
             </div>

@@ -31,16 +31,17 @@
         <div class="admin-panel">
         <div class="module">
             <div class="caption clearfix">
-               <span class="icon-roll-add">+</span>
+               <span class="icon-roll-add"><img src="static/img/add.png" alt="" class="redact-image"></span>
             </div>
             <div class="body hidden-panel">
                <form action="/books?operation=add" method="post" class="books-form" id="add-book-form">
                    <p><label for="add-book-isbn">ISBN:</label></p><input type="text" name="book-isbn" id="add-book-isbn" required>
                    <p><label for="add-book-title">Название:</label></p><input type="text" name="book-title" id="add-book-title" required>
                    <p><label for="add-book-copy">Количество:</label></p><input type="text" name="book-copy" id="add-book-copy" required>
-                   <p><label for="add-book-date_pub">Дата публикации:</label></p><input type="text" name="book-date_pub" id="add-book-date_pub" required>
+                   <p><label for="add-book-date_pub">Дата публикации:</label></p><input type="date" name="book-date_pub" id="add-book-date_pub" required>
                    <p><label for="add-book-cost">Себестоимость:</label></p><input type="text" name="book-cost" id="add-book-cost" required>
                    <p><label for="add-book-price">Цена продажи:</label></p><input type="text" name="book-price" id="add-book-price" required>
+{#                   <p><label for="add-book-price">Цена продажи:</label></p><input type="text" name="book-price" id="add-book-price" required>#}
                    <p><label for="add_autor_id">ID автора:</label></p><input type="text" name="autor" id="add_autor_id" required>
                    <br>
 
@@ -50,7 +51,7 @@
          </div>
          <div class="module">
             <div class="caption clearfix">
-               <span class="icon-roll-remove">-</span>
+               <span class="icon-roll-remove"><img src="static/img/delete.png" alt="" class="redact-image"></span>
             </div>
             <div class="body hidden-panel">
                <form action="/books?operation=remove" method="post" class="remove-books-form">
@@ -69,7 +70,7 @@
                    <p><label for="update-book-isbn">ISBN:</label></p><input type="text" name="book-isbn" id="update-book-isbn" class="update-book-isbn" required>
                    <p><label for="update-book-title">Название:</label></p><input type="text" name="book-title" id="update-book-title" required>
                    <p><label for="update-book-copy">Количество:</label></p><input type="text" name="book-copy" id="update-book-copy" required>
-                   <p><label for="update-book-date_pub">Дата публикации:</label></p><input type="text" name="book-date_pub" id="update-book-date_pub" required>
+                   <p><label for="update-book-date_pub">Дата публикации:</label></p><input type="date" name="book-date_pub" id="update-book-date_pub" required>
                    <p><label for="update-book-cost">Себестоимость:</label></p><input type="text" name="book-cost" id="update-book-cost" required>
                    <p><label for="update-book-price">Цена продажи:</label></p><input type="text" name="book-price" id="update-book-price" required>
                    <p><input type="submit" value="Отправить"></p>

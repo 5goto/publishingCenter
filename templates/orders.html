@@ -38,12 +38,12 @@
         <div class="admin-panel">
         <div class="module">
             <div class="caption clearfix">
-               <span class="icon-roll-add">+</span>
+               <span class="icon-roll-add"><img src="static/img/add.png" alt="" class="redact-image"></span>
             </div>
             <div class="body hidden-panel">
                <form action="/orders?operation=add" method="post" class="books-form">
                    <p><label for="add-number">Номер заказа:</label></p><input type="text" name="number" id="add-number">
-                   <p><label for="add-finish-date">Дата выполнения:</label></p><input type="text" name="finish-date" id="add-finish-date">
+                   <p><label for="add-finish-date">Дата выполнения:</label></p><input type="date" name="finish-date" id="add-finish-date">
                    <p><label for="add-quantity">Количество экземпляров:</label></p><input type="text" name="quantity" id="add-quantity">
                    <p><label for="add-cust-id">ID заказчика:</label></p><input type="text" name="cust-id" id="add-cust-id">
                    <p><label for="add-book-id">ID книги:</label></p><input type="text" name="book-id" id="add-book-id">
@@ -53,7 +53,7 @@
          </div>
          <div class="module">
             <div class="caption clearfix">
-               <span class="icon-roll-remove">-</span>
+               <span class="icon-roll-remove"><img src="static/img/delete.png" alt="" class="redact-image"></span>
             </div>
             <div class="body hidden-panel">
                <form action="/orders?operation=remove" method="post" class="books-form">
@@ -70,7 +70,7 @@
                <form action="/orders?operation=update" method="post" class="books-form">
                    <p><label for="add-id">ID:</label></p><input type="text" name="id" id="add-id" readonly>
                    <p><label for="update-number">Номер заказа:</label></p><input type="text" name="number" id="update-number">
-                   <p><label for="update-finish-date">Дата выполнения:</label></p><input type="text" name="finish-date" id="update-finish-date">
+                   <p><label for="update-finish-date">Дата выполнения:</label></p><input type="date" name="finish-date" id="update-finish-date">
                    <p><label for="update-quantity">Количество экземпляров:</label></p><input type="text" name="quantity" id="update-quantity">
                    <p><input type="submit" value="Отправить"></p>
                </form>

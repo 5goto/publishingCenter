@@ -64,7 +64,7 @@ tr:hover td{
 
 input {
 	width: 300px;
-	font-size: 1.2em;
+	font-size: 1.1em;
 	padding: 6px 0 4px 10px;
 	border: 1px solid #cecece;
 	background: #F6F6f6;
@@ -80,7 +80,7 @@ input {
     margin: auto;
     /*color: white;*/
     border: 16px solid;
-    min-height: 800px;
+    min-height: 1000px;
     /*background-color: #dcdbdb;*/
 }
 
@@ -120,15 +120,22 @@ input:hover {
 .logo {
     width: 50px;
     height: 50px;
+    margin: auto;
 }
 
-.logo-with-label {
+.logo-with-#cbcbcb {
     display: flex;
     align-items: center;
 }
 
 .logo-with-label a {
     font-size: 2em;
+}
+
+.logo-with-label {
+    display: flex;
+    justify-content: center;
+
 }
 
 .user-panel {
@@ -185,15 +192,19 @@ span {
 
 .admin-panel {
     position: fixed;
-    top: 110px;
-    right: 20%;
+    top: 130px;
+    right: 10%;
     z-index: 101;
     max-width: 70%;
     display: flex;
+    border: 3px solid black;
     justify-content: space-around;
-    border: 16px black;
     border-radius: 10%;
     background-color: #cbcbcb;
+}
+
+.admin-panel:hover {
+    background-color: #ffffff;
 }
 
 .module {
@@ -230,6 +241,28 @@ form :invalid {
 .flash.error{
     border: 1px solid #FF4343;
     background: #FF9C9C;
+}
+
+.main-page-navigation li {
+    margin: auto;
+    align-self: center;
+    display: flex;
+    justify-content: center;
+}
+
+.main-page-navigation li a {
+    margin: auto;
+    align-self: center;
+    text-align: center;
+    font-size: 1.2em;
+}
+
+.main-header {
+    justify-content: right;
+}
+
+.main-page-navigation li:hover {
+    background-color: #b0c9ff;
 }
 
 @media screen and (max-width: 1720px) {

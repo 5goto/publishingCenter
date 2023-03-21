@@ -1,4 +1,16 @@
 
+$.getJSON("/books?user=true", "", (data) => {
+    if(data.user === "representative") {
+        $('.representative').removeClass("disabled");
+        $('.admin-panel').css("display", "none");
+    } else if(data.user === "manager") {
+        $('.manager').removeClass("disabled");
+
+    }
+    else {
+        $('.menu-link').removeClass("disabled");
+    }
+})
 
 $('#in_button').on('click', function (event) {
     event.preventDefault();
@@ -6,7 +18,9 @@ $('#in_button').on('click', function (event) {
 
     const start = document.querySelector('#start_id').value
     const end = document.querySelector('#end_id').value
-
+    if (!start || !end) {
+        return
+    }
     const data_to_send = JSON.stringify({
         start,
         end
@@ -28,7 +42,7 @@ $('#in_button').on('click', function (event) {
 
                 let content = "<table class=\"table\">"
                 content += '<tr><th>Название книги</th><th>Себестоимость</th><th>Цена продажи</th><th>Количество экземпляров</th><th>Прибыль от продажи</th></tr>'
-
+                let full_sum = 0;
                 for (const item of objWithData) {
                     for (const arrName in item) {
                         content += '<tr><td colspan="5">' + `Заказчик: ${arrName}` + '</td></tr>'
@@ -41,11 +55,13 @@ $('#in_button').on('click', function (event) {
                             sum += Number(row[4])
                             content += '</tr>';
                         }
+                        full_sum += sum;
                         content += '<tr><td colspan="4">' + `Суммарная прибыль от заказчика:` + '</td><td>' + `${sum}` + '</td></tr>'
                         // console.log(arrName)
                         // console.log(item[arrName])
                     }
                 }
+                content += '<tr><td colspan="4">' + `Суммарная прибыль за указанный период:` + '</td><td>' + `${full_sum}` + '</td></tr>'
                 content += "</table>";
                 $placeForData.append(content);
             } else {
