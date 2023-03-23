@@ -167,7 +167,8 @@ def deleteWriterById(id):
     cursor.execute(f"DELETE FROM writers WHERE writer_id = {id};")
     op_result = cursor.rowcount
     cursor.execute(
-        f"UPDATE contracts SET is_the_contract_terminated = true, contract_termination_date = '{current_date}' WHERE contract_id = {fk_contract_number};")
+        f"UPDATE contracts SET is_the_contract_terminated = true, "
+        f"contract_termination_date = '{current_date}' WHERE contract_id = {fk_contract_number};")
 
     conn.commit()
 
@@ -489,7 +490,8 @@ def changeWriter(data):
         if data['patro'] != '':
             patr = data['patro']
         cursor.execute(
-            f'''UPDATE writers SET passport_series = %s, passport_number = %s, last_name = %s, first_name = %s, surname = %s, address = %s, phone_number = %s WHERE writer_id = {int(data['id'])}''',
+            f'''UPDATE writers SET passport_series = %s, passport_number = %s, last_name = %s, first_name = %s,
+             surname = %s, address = %s, phone_number = %s WHERE writer_id = {int(data['id'])}''',
             (data['seria'], data['number'], data['lastname'], data['name'], patr, data['address'], data['phone']))
         conn.commit()
         cursor.close()
@@ -517,7 +519,8 @@ def changeContract(data):
         date_of_finish = current_date + datetime.timedelta(days=(365 * int(data['validity'])))
 
         cursor.execute(
-            f'''UPDATE contracts SET contract_number = %s, date_of_conclusion = %s, term_of_imprisonment = %s, contract_termination_date = %s WHERE contract_id = {int(data['title'])}''',
+            f'''UPDATE contracts SET contract_number = %s, date_of_conclusion = %s, term_of_imprisonment = %s,
+             contract_termination_date = %s WHERE contract_id = {int(data['title'])}''',
             (data['contract-num'], data['date_start'], int(data['validity']), date_of_finish))
         conn.commit()
         cursor.close()
@@ -550,7 +553,8 @@ def changeCustomer(data):
         if data['patro'] != '':
             patr = data['patro']
         cursor.execute(
-            f'''UPDATE customers SET legal_name = %s, last_name = %s, first_name = %s, surname = %s, address = %s, phone_number = %s WHERE customer_id = {int(data['id'])}''',
+            f'''UPDATE customers SET legal_name = %s, last_name = %s, first_name = %s, surname = %s,
+             address = %s, phone_number = %s WHERE customer_id = {int(data['id'])}''',
             (data['title'], data['lastname'], data['name'], patr, data['address'], data['phone']))
         conn.commit()
         cursor.close()
