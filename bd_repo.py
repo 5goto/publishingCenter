@@ -650,7 +650,7 @@ def removeAutorToBook(data):
 
 #########################################################
 def getUserByLogin(login):
-    conn = psycopg2.connect(dbname="publishing_login", user="postgres", password="postgrepass",
+    conn = psycopg2.connect(dbname="publishing_center", user="postgres", password="postgrepass",
                             host=r"localhost")
     cursor = conn.cursor()
     cursor.execute(f"SELECT * FROM users WHERE login='{login}'")
@@ -662,7 +662,7 @@ def getUserByLogin(login):
 
 
 def getUserByID(id):
-    conn = psycopg2.connect(dbname="publishing_login", user="postgres", password="postgrepass",
+    conn = psycopg2.connect(dbname="publishing_center", user="postgres", password="postgrepass",
                             host=r"localhost")
     cursor = conn.cursor()
     cursor.execute(f"SELECT * FROM users WHERE user_id='{id}'")
