@@ -1,4 +1,4 @@
-import bd_repo
+# import bd_repo
 from flask import Flask, render_template, url_for, request, redirect, session, flash
 from flask_login import LoginManager, login_user, login_required, logout_user, current_user
 

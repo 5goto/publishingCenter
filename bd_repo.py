@@ -76,7 +76,6 @@ def deleteBookById(id):
 
     cursor.execute(f"SELECT order_id FROM orders WHERE fk_book_id = {id};")
     ordersWithThatBookId = cursor.fetchall()
-    # print(ordersWithThatBookId)
     for item in ordersWithThatBookId:
         deleteOrderById(item[0])
 
